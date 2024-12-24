@@ -22,6 +22,33 @@ jobs:
       - name: Gradle Information
         run: ./gradlew project dependencies
 
+  build:
+    runs-on: ubuntu-latest
+    needs: setup
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: [ 17, 21 ]
+
+    name: Build Java Project
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java-version }}
+          cache: 'gradle'
+      - name: Change Permissions
+        run: chmod +x ./gradlew
+      - name: Build with Gradle
+        env:
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
+        run: ./gradlew assemble publishToMavenLocal
+
   test:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
@@ -33,6 +60,7 @@ jobs:
 
     strategy:
       matrix:
+        fail-fast: false
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     name: Test Project
@@ -93,33 +121,6 @@ jobs:
           pass-emoji: ✅
           min-coverage-overall: 85
           min-coverage-changed-files: 90
-
-  build:
-    runs-on: ubuntu-latest
-    needs: setup
-    timeout-minutes: 30
-    fail-fast: false
-
-    strategy:
-      matrix:
-        java-version: [ 17, 21 ]
-
-    name: Build Java Project
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK ${{ matrix.java-version }}
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: ${{ matrix.java-version }}
-          cache: 'gradle'
-      - name: Change Permissions
-        run: chmod +x ./gradlew
-      - name: Build with Gradle
-        env:
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
-          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
-        run: ./gradlew assemble publishToMavenLocal
 
   deploy:
     runs-on: ubuntu-latest
