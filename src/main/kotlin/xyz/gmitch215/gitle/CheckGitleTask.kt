@@ -1,7 +1,9 @@
 package xyz.gmitch215.gitle
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
+import org.jetbrains.annotations.VisibleForTesting
 
 open class CheckGitleTask : DefaultTask() {
 
@@ -10,10 +12,9 @@ open class CheckGitleTask : DefaultTask() {
         description = "Checks all of the registered Git dependencies"
     }
 
-    /**
-     * The list of dependencies to check.
-     */
-    val gitDependencies: List<GitDependency>
+    @get:VisibleForTesting
+    @get:Internal
+    internal val gitDependencies: List<GitDependency>
         get() = dependencies.toList()
 
     @TaskAction
