@@ -20,7 +20,6 @@ $dokka.location:xyz.gmitch215.gitle//ssh/#xyz.gmitch215.gitle.GitLabDependency/P
 $dokka.location:xyz.gmitch215.gitle/CheckGitleTask///PointingToDeclaration/gitle/xyz.gmitch215.gitle/-check-gitle-task/index.html
 $dokka.location:xyz.gmitch215.gitle/CheckGitleTask/CheckGitleTask/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-check-gitle-task/-check-gitle-task.html
 $dokka.location:xyz.gmitch215.gitle/CheckGitleTask/checkGitle/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-check-gitle-task/check-gitle.html
-$dokka.location:xyz.gmitch215.gitle/CheckGitleTask/gitDependencies/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-check-gitle-task/git-dependencies.html
 $dokka.location:xyz.gmitch215.gitle/GitDependency///PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-dependency/index.html
 $dokka.location:xyz.gmitch215.gitle/GitDependency/GitDependency/#kotlin.String#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-dependency/-git-dependency.html
 $dokka.location:xyz.gmitch215.gitle/GitDependency/checkout/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-dependency/checkout.html
