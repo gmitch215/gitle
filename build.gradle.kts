@@ -25,6 +25,7 @@ gradlePlugin {
             displayName = "Gitle"
             description = "Download artifacts from Git Repositories"
             implementationClass = "xyz.gmitch215.gitle.Gitle"
+            tags = listOf("git", "download", "repository", "dependency")
         }
     }
 }
