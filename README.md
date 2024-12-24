@@ -18,6 +18,9 @@ Simply use the `import` function to download the artifact from the repository. I
 repository and add its artifacts to your maven local repository.
 
 ```kotlin
+import xyz.gmitch215.gitle.import
+import xyz.gmitch215.gitle.github
+
 plugins {
     id("xyz.gmitch215.gitle") version "0.1.0"
 }
