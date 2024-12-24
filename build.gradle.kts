@@ -14,6 +14,7 @@ plugins {
 
 group = "xyz.gmitch215"
 version = "0.1.0"
+description = "Download artifacts from Git Repositories"
 
 gradlePlugin {
     website.set("https://github.com/gmitch215/gitle")
