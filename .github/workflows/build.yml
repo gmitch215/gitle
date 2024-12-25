@@ -53,7 +53,7 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
-        run: ./gradlew assemble publishToMavenLocal
+        run: ./gradlew assemble
 
   test:
     runs-on: ${{ matrix.os }}
@@ -91,7 +91,7 @@ jobs:
       - name: Collect JaCoCo Report
         if: ${{ github.event_name != 'pull_request' }}
         id: jacoco_reporter
-        uses: PavanMudigonda/jacoco-reporter@v5.0
+        uses: PavanMudigonda/jacoco-reporter@v5.1
         with:
           coverage_results_path: build/jacoco.xml
           coverage_report_name: Code Coverage (${{ matrix.os }})
