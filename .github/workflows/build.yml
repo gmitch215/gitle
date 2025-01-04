@@ -127,6 +127,8 @@ jobs:
           pass-emoji: ✅
           min-coverage-overall: 85
           min-coverage-changed-files: 90
+          title: Coverage Report (${{ runner.os }})
+          update-comment: true
 
       - name: Stop Gradle
         run: ./gradlew --stop
