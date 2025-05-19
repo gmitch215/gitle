@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "xyz.gmitch215"
-version = "0.1.0"
+version = "0.1.1"
 description = "Download artifacts from Git Repositories"
 
 gradlePlugin {
