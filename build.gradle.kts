@@ -44,7 +44,7 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-core:1.5.18")
     implementation("io.github.oshai:kotlin-logging:7.0.12")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.4")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.0")
     testImplementation(kotlin("test"))
 }
 
