@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    kotlin("jvm") version "2.2.20"
+    kotlin("jvm") version "2.2.21"
     id("org.jetbrains.dokka") version "2.1.0"
     id("com.gradle.plugin-publish") version "2.0.0"
     id("com.vanniktech.maven.publish") version "0.34.0"
@@ -40,11 +40,11 @@ dependencies {
     implementation(gradleApi())
     implementation(kotlin("stdlib"))
 
-    runtimeOnly("ch.qos.logback:logback-classic:1.5.19")
-    runtimeOnly("ch.qos.logback:logback-core:1.5.19")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.20")
+    runtimeOnly("ch.qos.logback:logback-core:1.5.20")
     implementation("io.github.oshai:kotlin-logging:7.0.13")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.1")
     testImplementation(kotlin("test"))
 }
 
