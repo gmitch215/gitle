@@ -5,7 +5,7 @@ plugins {
     kotlin("jvm") version "2.2.21"
     id("org.jetbrains.dokka") version "2.1.0"
     id("com.gradle.plugin-publish") version "2.0.0"
-    id("com.vanniktech.maven.publish") version "0.34.0"
+    id("com.vanniktech.maven.publish") version "0.35.0"
 
     jacoco
     `maven-publish`
@@ -40,8 +40,8 @@ dependencies {
     implementation(gradleApi())
     implementation(kotlin("stdlib"))
 
-    runtimeOnly("ch.qos.logback:logback-classic:1.5.20")
-    runtimeOnly("ch.qos.logback:logback-core:1.5.20")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.22")
+    runtimeOnly("ch.qos.logback:logback-core:1.5.22")
     implementation("io.github.oshai:kotlin-logging:7.0.13")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.1")
