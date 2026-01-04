@@ -84,7 +84,7 @@ jobs:
         run: ./gradlew clean test
       - name: Archive Test Reports
         if: success() || failure()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: test-report-${{ runner.os }}
           path: build/reports/tests/test/
@@ -113,7 +113,7 @@ jobs:
 
       - name: Upload Code Coverage Artifacts (Push)
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-report-${{ runner.os }}
           path: "*/coverage-results.md"
