@@ -1,6 +1,9 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:xyz.gmitch215.gitle////PointingToDeclaration/gitle/xyz.gmitch215.gitle/index.html
+$dokka.location:xyz.gmitch215.gitle//bitbucket/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/bitbucket.html
+$dokka.location:xyz.gmitch215.gitle//bitbucket/#kotlin.String#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/bitbucket.html
+$dokka.location:xyz.gmitch215.gitle//bitbucket/#xyz.gmitch215.gitle.BitBucketDependency/PointingToDeclaration/gitle/xyz.gmitch215.gitle/bitbucket.html
 $dokka.location:xyz.gmitch215.gitle//github/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/github.html
 $dokka.location:xyz.gmitch215.gitle//github/#kotlin.String#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/github.html
 $dokka.location:xyz.gmitch215.gitle//gitlab/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/gitlab.html
@@ -8,15 +11,17 @@ $dokka.location:xyz.gmitch215.gitle//gitlab/#kotlin.String#kotlin.String?#kotlin
 $dokka.location:xyz.gmitch215.gitle//http/#kotlin.String#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/http.html
 $dokka.location:xyz.gmitch215.gitle//https/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/https.html
 $dokka.location:xyz.gmitch215.gitle//https/#kotlin.String#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/https.html
-$dokka.location:xyz.gmitch215.gitle//import/org.gradle.api.artifacts.dsl.DependencyHandler#kotlin.Array[kotlin.Any]/PointingToDeclaration/gitle/xyz.gmitch215.gitle/import.html
-$dokka.location:xyz.gmitch215.gitle//import/org.gradle.api.artifacts.dsl.DependencyHandler#kotlin.Array[kotlin.String]/PointingToDeclaration/gitle/xyz.gmitch215.gitle/import.html
-$dokka.location:xyz.gmitch215.gitle//import/org.gradle.api.artifacts.dsl.DependencyHandler#kotlin.Array[xyz.gmitch215.gitle.GitDependency]/PointingToDeclaration/gitle/xyz.gmitch215.gitle/import.html
+$dokka.location:xyz.gmitch215.gitle//import/org.gradle.api.artifacts.dsl.DependencyHandler#kotlin.Any/PointingToDeclaration/gitle/xyz.gmitch215.gitle/import.html
 $dokka.location:xyz.gmitch215.gitle//import/org.gradle.api.artifacts.dsl.DependencyHandler#kotlin.String/PointingToDeclaration/gitle/xyz.gmitch215.gitle/import.html
 $dokka.location:xyz.gmitch215.gitle//import/org.gradle.api.artifacts.dsl.DependencyHandler#xyz.gmitch215.gitle.GitDependency/PointingToDeclaration/gitle/xyz.gmitch215.gitle/import.html
 $dokka.location:xyz.gmitch215.gitle//ssh/#kotlin.String#kotlin.String#kotlin.String#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/ssh.html
 $dokka.location:xyz.gmitch215.gitle//ssh/#kotlin.String#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/ssh.html
 $dokka.location:xyz.gmitch215.gitle//ssh/#xyz.gmitch215.gitle.GitHubDependency/PointingToDeclaration/gitle/xyz.gmitch215.gitle/ssh.html
 $dokka.location:xyz.gmitch215.gitle//ssh/#xyz.gmitch215.gitle.GitLabDependency/PointingToDeclaration/gitle/xyz.gmitch215.gitle/ssh.html
+$dokka.location:xyz.gmitch215.gitle/BitBucketDependency///PointingToDeclaration/gitle/xyz.gmitch215.gitle/-bit-bucket-dependency/index.html
+$dokka.location:xyz.gmitch215.gitle/BitBucketDependency/BitBucketDependency/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-bit-bucket-dependency/-bit-bucket-dependency.html
+$dokka.location:xyz.gmitch215.gitle/BitBucketDependency/repoSlug/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-bit-bucket-dependency/repo-slug.html
+$dokka.location:xyz.gmitch215.gitle/BitBucketDependency/workspace/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-bit-bucket-dependency/workspace.html
 $dokka.location:xyz.gmitch215.gitle/CheckGitleTask///PointingToDeclaration/gitle/xyz.gmitch215.gitle/-check-gitle-task/index.html
 $dokka.location:xyz.gmitch215.gitle/CheckGitleTask/CheckGitleTask/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-check-gitle-task/-check-gitle-task.html
 $dokka.location:xyz.gmitch215.gitle/CheckGitleTask/checkGitle/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-check-gitle-task/check-gitle.html
@@ -28,15 +33,12 @@ $dokka.location:xyz.gmitch215.gitle/GitDependency/repositoryURL/#/PointingToDecl
 $dokka.location:xyz.gmitch215.gitle/GitDependency/updatePolicy/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-dependency/update-policy.html
 $dokka.location:xyz.gmitch215.gitle/GitHubDependency///PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-hub-dependency/index.html
 $dokka.location:xyz.gmitch215.gitle/GitHubDependency/GitHubDependency/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-hub-dependency/-git-hub-dependency.html
-$dokka.location:xyz.gmitch215.gitle/GitHubDependency/accessToken/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-hub-dependency/access-token.html
 $dokka.location:xyz.gmitch215.gitle/GitHubDependency/repoName/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-hub-dependency/repo-name.html
 $dokka.location:xyz.gmitch215.gitle/GitHubDependency/username/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-hub-dependency/username.html
 $dokka.location:xyz.gmitch215.gitle/GitLabDependency///PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-lab-dependency/index.html
 $dokka.location:xyz.gmitch215.gitle/GitLabDependency/GitLabDependency/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#kotlin.String?#xyz.gmitch215.gitle.UpdatePolicy/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-lab-dependency/-git-lab-dependency.html
-$dokka.location:xyz.gmitch215.gitle/GitLabDependency/loginUsername/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-lab-dependency/login-username.html
 $dokka.location:xyz.gmitch215.gitle/GitLabDependency/projectId/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-lab-dependency/project-id.html
 $dokka.location:xyz.gmitch215.gitle/GitLabDependency/server/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-lab-dependency/server.html
-$dokka.location:xyz.gmitch215.gitle/GitLabDependency/token/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-git-lab-dependency/token.html
 $dokka.location:xyz.gmitch215.gitle/Gitle///PointingToDeclaration/gitle/xyz.gmitch215.gitle/-gitle/index.html
 $dokka.location:xyz.gmitch215.gitle/Gitle/Gitle/#/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-gitle/-gitle.html
 $dokka.location:xyz.gmitch215.gitle/Gitle/apply/#org.gradle.api.Project/PointingToDeclaration/gitle/xyz.gmitch215.gitle/-gitle/apply.html
