@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     kotlin("jvm") version "2.3.0"
@@ -13,7 +12,7 @@ plugins {
 }
 
 group = "xyz.gmitch215"
-version = "0.1.1"
+version = "0.1.2"
 description = "Download artifacts from Git Repositories"
 
 gradlePlugin {
@@ -21,12 +20,12 @@ gradlePlugin {
     vcsUrl.set("https://github.com/gmitch215/gitle.git")
 
     plugins {
-        create("gitle") {
+        register("gitle") {
             id = "xyz.gmitch215.gitle"
             displayName = "Gitle"
             description = "Download artifacts from Git Repositories"
             implementationClass = "xyz.gmitch215.gitle.Gitle"
-            tags = listOf("git", "download", "repository", "dependency")
+            tags = listOf("git", "download", "repository", "dependency", "github", "gitlab")
         }
     }
 }
@@ -39,10 +38,6 @@ repositories {
 dependencies {
     implementation(gradleApi())
     implementation(kotlin("stdlib"))
-
-    runtimeOnly("ch.qos.logback:logback-classic:1.5.24")
-    runtimeOnly("ch.qos.logback:logback-core:1.5.24")
-    implementation("io.github.oshai:kotlin-logging:7.0.14")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.2")
     testImplementation(kotlin("test"))
@@ -143,6 +138,6 @@ mavenPublishing {
         }
     }
 
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
+    publishToMavenCentral(true)
     signAllPublications()
 }
