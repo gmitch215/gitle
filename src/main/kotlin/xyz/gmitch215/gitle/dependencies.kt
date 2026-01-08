@@ -44,32 +44,32 @@ abstract class GitDependency(
 
     internal fun clone() {
         if (!isOnline()) {
-            logger.error { "Failed to clone '$repositoryURL': No internet connection" }
+            logger.error("Failed to clone '$repositoryURL': No internet connection")
             throw GitleException("Failed to clone '$repositoryURL': No internet connection")
         }
 
-        logger.debug { "Starting clone of '$repositoryURL' in '${folder.absolutePath}'" }
+        logger.debug("Starting clone of '$repositoryURL' in '${folder.absolutePath}'")
         if (folder.exists()) {
-            logger.debug { "Deleting existing folder '$folder'..." }
+            logger.debug("Deleting existing folder '{}'...", folder)
             folder.deleteRecursively()
         }
 
         folder.mkdirs()
-        logger.info { "Cloning '$repositoryURL'..." }
+        logger.info("Cloning '$repositoryURL'...")
 
         val builder = ProcessBuilder("git", "clone", repositoryURL, ".").directory(folder)
         if (extension.showOutput) builder.inheritIO()
 
         val process = builder.start()
         val cloneExit = process.waitFor()
-        logger.debug { "Clone exit code: $cloneExit" }
+        logger.debug("Clone exit code: $cloneExit")
         if (cloneExit != 0) {
             val error = process.errorStream.bufferedReader().use { it.readText() }.trim()
-            logger.error { "Failed to clone repository '$repositoryURL' (exit code $cloneExit): $error" }
+            logger.error("Failed to clone repository '$repositoryURL' (exit code $cloneExit): $error")
             throw GitleException("Failed to clone repository '$repositoryURL' (exit code $cloneExit): $error")
         }
 
-        logger.info { "Cloned '$repositoryURL'" }
+        logger.info("Cloned '$repositoryURL'")
 
         if (checkout != null)
             checkout()
@@ -77,53 +77,58 @@ abstract class GitDependency(
 
     private fun checkout() {
         if (checkout == null) {
-            logger.warn { "No checkout specified for '$repositoryURL'" }
+            logger.warn("No checkout specified for '$repositoryURL'")
             return
         }
 
-        logger.info { "Checking out '$checkout'..." }
+        logger.info("Checking out '$checkout'...")
 
         val builder = ProcessBuilder("git", "checkout", checkout).directory(folder)
         if (extension.showOutput) builder.inheritIO()
 
         val process = builder.start()
         val checkoutExit = process.waitFor()
-        logger.debug { "Checkout exit code: $checkoutExit" }
+        logger.debug("Checkout exit code: $checkoutExit")
         if (checkoutExit != 0) {
             val error = process.errorStream.bufferedReader().use { it.readText() }.trim()
-            logger.error { "Failed to checkout '$repositoryURL' at '$checkout' (exit code $checkoutExit): $error" }
+            logger.error("Failed to checkout '$repositoryURL' at '$checkout' (exit code $checkoutExit): $error")
             throw GitleException("Failed to checkout '$repositoryURL' at '$checkout' (exit code $checkoutExit): $error")
         }
 
-        logger.info { "Checked out '$checkout'" }
+        logger.info("Checked out '$checkout'")
     }
 
     internal fun update() {
-        logger.info { "Updating '$repositoryURL'..." }
+        logger.info("Updating '$repositoryURL'...")
 
         val builder = ProcessBuilder("git", "pull").directory(folder)
         if (extension.showOutput) builder.inheritIO()
 
         val process = builder.start()
         val updateExit = process.waitFor()
-        logger.debug { "Update exit code: $updateExit" }
+        logger.debug("Update exit code: $updateExit")
 
         if (updateExit != 0) {
             val error = process.errorStream.bufferedReader().use { it.readText() }.trim()
-            logger.error { "Failed to update repository '$repositoryURL' (exit code $updateExit): $error" }
+            logger.error("Failed to update repository '$repositoryURL' (exit code $updateExit): $error")
             throw GitleException("Failed to update repository '$repositoryURL' (exit code $updateExit): $error")
         }
         
         if (checkout != null)
             checkout()
 
-        logger.info { "Updated '$repositoryURL', publishing..." }
+        logger.info("Updated '$repositoryURL', publishing...")
         publish()
-        logger.info { "Published '$repositoryURL'" }
+        logger.info("Published '$repositoryURL'")
     }
 
     @VisibleForTesting
     internal fun isUpToDate(): Boolean {
+        // perform git fetch
+        val fetchBuilder = ProcessBuilder("git", "fetch", "origin").directory(folder)
+        if (extension.showOutput) fetchBuilder.inheritIO()
+
+        // perform remote show origin
         val builder = ProcessBuilder("git", "remote", "show", "origin").directory(folder)
         if (extension.showOutput) builder.inheritIO()
 
@@ -151,10 +156,10 @@ abstract class GitDependency(
     internal fun checkUpdate() {
         if (updatePolicy == UpdatePolicy.IF_MISSING) {
             if (!folder.exists()) {
-                logger.debug { "'$repositoryURL' is missing, cloning..." }
+                logger.debug("'$repositoryURL' is missing, cloning...")
                 clone()
 
-                logger.debug { "Updating '$repositoryURL'..." }
+                logger.debug("Updating '$repositoryURL'...")
                 update()
                 return
             }
@@ -162,17 +167,17 @@ abstract class GitDependency(
 
         if (updatePolicy == UpdatePolicy.IF_OUT_OF_DATE) {
             if (!isOnline()) {
-                logger.error { "Failed to check if '$repositoryURL' is out of date: No internet connection" }
+                logger.error("Failed to check if '$repositoryURL' is out of date: No internet connection")
                 return
             }
 
-            logger.debug { "Checking if '$repositoryURL' is out of date..." }
+            logger.debug("Checking if '$repositoryURL' is out of date...")
             if (isUpToDate()) {
-                logger.debug { "'$repositoryURL' is up to date" }
+                logger.debug("'$repositoryURL' is up to date")
                 return
             }
 
-            logger.debug { "'$repositoryURL' is out of date" }
+            logger.debug("'$repositoryURL' is out of date")
             update()
             return
         }
@@ -181,7 +186,7 @@ abstract class GitDependency(
 
         val lastUpdated = File(folder, "gitle-$idHash.lastUpdated")
         if (!lastUpdated.exists()) {
-            logger.debug { "No last updated file found for '$repositoryURL'" }
+            logger.debug("No last updated file found for '$repositoryURL'")
 
             update()
             lastUpdated.createNewFile()
@@ -198,7 +203,7 @@ abstract class GitDependency(
 
     internal fun publish() {
         if (type == null) {
-            logger.warn { "No project type found for '$repositoryURL'" }
+            logger.warn("No project type found for '$repositoryURL'")
             return
         }
 
@@ -210,11 +215,11 @@ abstract class GitDependency(
         val exitCode = process.waitFor()
         if (exitCode != 0) {
             val error = process.errorStream.bufferedReader().use { it.readText() }.trim()
-            logger.error { "Failed to publish '$repositoryURL' (exit code $exitCode): $error" }
+            logger.error("Failed to publish '$repositoryURL' (exit code $exitCode): $error")
             throw GitleException("Failed to publish '$repositoryURL' (exit code $exitCode): $error")
         }
 
-        logger.info { "Published project '$repositoryURL'" }
+        logger.info("Published project '$repositoryURL'")
     }
 
 }
@@ -316,7 +321,7 @@ class GitHubDependency(
     /**
      * The access token to use for cloning the repository.
      */
-    val accessToken: String? = null,
+    accessToken: String? = null,
     /**
      * The branch, tag, or commit to checkout.
      */
@@ -346,11 +351,11 @@ class GitLabDependency(
     /**
      * The username to use for the GitLab connection.
      */
-    val loginUsername: String? = null,
+    loginUsername: String? = null,
     /**
      * The token used to clone the repository.
      */
-    val token: String? = null,
+    token: String? = null,
     /**
      * The branch, tag, or commit to checkout.
      */
@@ -369,6 +374,36 @@ class GitLabDependency(
         get() = "$server-$projectId"
 }
 
+/**
+ * Represents a dependency that is downloaded from a BitBucket repository.
+ */
+class BitBucketDependency(
+    /**
+     * The workspace of the repository.
+     */
+    val workspace: String,
+    /**
+     * The repository slug.
+     */
+    val repoSlug: String,
+    /**
+     * The access token to use for cloning the repository.
+     */
+    accessToken: String? = null,
+    /**
+     * The branch, tag, or commit to checkout.
+     */
+    checkout: String? = null,
+    /**
+     * The update policy for the dependency.
+     */
+    updatePolicy: UpdatePolicy = extension.defaultUpdatePolicy
+) : HttpsDependency("bitbucket.org", "$workspace/$repoSlug", accessToken, checkout, updatePolicy) {
+    override val folderParent: String = "bitbucket"
+    override val folderName: String
+        get() = "$workspace-$repoSlug"
+}
+
 // Functions
 
 /**
@@ -376,6 +411,7 @@ class GitLabDependency(
  * @param dependency The dependency to add.
  * @see GitDependency
  */
+@Suppress("UnusedReceiverParameter")
 fun DependencyHandler.import(dependency: GitDependency) {
     if (dependencies.any { it.repositoryURL == dependency.repositoryURL }) return
     dependencies.add(dependency)
@@ -391,7 +427,7 @@ fun DependencyHandler.import(url: String) {
     if (url.startsWith("ssh://"))
         import(ssh(url))
     else if (url.startsWith("http://")) {
-        logger.warn { "Using insecure HTTP protocol for dependency: $url" }
+        logger.warn("Using insecure HTTP protocol for dependency: $url")
 
         @Suppress("DEPRECATION")
         import(http(url))
@@ -653,3 +689,56 @@ fun ssh(github: GitHubDependency) = ssh("github.com", "git", "${github.username}
  * @see GitLabDependency
  */
 fun ssh(gitlab: GitLabDependency) = ssh("gitlab.com", "git", gitlab.projectId, gitlab.checkout, gitlab.updatePolicy)
+
+/**
+ * Creates a new BitBucket dependency.
+ *
+ * Clones over HTTPS.
+ * @param workspace The workspace of the repository.
+ * @param repoSlug The repository slug.
+ * @param accessToken The access token to use for cloning the repository. If not specified, tries to fund an environment variable named `BITBUCKET_TOKEN`, or clones anonymously.
+ * @param checkout The branch, tag, or commit to checkout. If not specified, the default branch is used.
+ * @param updatePolicy The update policy for the dependency. Default is [UpdatePolicy.IF_OUT_OF_DATE].
+ * @return The BitBucket dependency.
+ * @see BitBucketDependency
+ */
+fun bitbucket(
+    workspace: String,
+    repoSlug: String,
+    accessToken: String? = null,
+    checkout: String? = null,
+    updatePolicy: UpdatePolicy = extension.defaultUpdatePolicy
+): BitBucketDependency = BitBucketDependency(workspace, repoSlug, accessToken, checkout, updatePolicy)
+
+/**
+ * Creates a new BitBucket dependency.
+ *
+ * Clones over HTTPS.
+ * @param slug The slug of the repository in the format `workspace/repo`.
+ * @param accessToken The access token to use for cloning the repository. If not specified, tries to fund an environment variable named `BITBUCKET_TOKEN`, or clones anonymously.
+ * @param checkout The branch, tag, or commit to checkout. If not specified, the default branch is used.
+ * @param updatePolicy The update policy for the dependency. Default is [UpdatePolicy.IF_OUT_OF_DATE].
+ * @return The BitBucket dependency.
+ * @see BitBucketDependency
+ */
+fun bitbucket(
+    slug: String,
+    accessToken: String? = null,
+    checkout: String? = null,
+    updatePolicy: UpdatePolicy = extension.defaultUpdatePolicy
+): BitBucketDependency {
+    if ('/' !in slug) throw IllegalArgumentException("Invalid slug: $slug")
+
+    val (workspace, repoSlug) = slug.split('/', limit = 2)
+    return bitbucket(workspace, repoSlug, accessToken, checkout, updatePolicy)
+}
+
+/**
+ * Creates a new BitBucket dependency.
+ *
+ * Clones over HTTPS.
+ * @param bitbucket The BitBucket dependency.
+ * @return The BitBucket dependency.
+ * @see BitBucketDependency
+ */
+fun bitbucket(bitbucket: BitBucketDependency) = https("bitbucket.org", "${bitbucket.workspace}/${bitbucket.repoSlug}", bitbucket.credentials, bitbucket.checkout, bitbucket.updatePolicy)

@@ -23,6 +23,9 @@ open class GitleExtension {
 
     /**
      * Whether to show the output of the commands run.
+     *
+     * NOTE: This may expose sensitive information such as SSH host keys or usernames.
+     * Be cautious when enabling this in production environments.
      */
     var showOutput = false
 

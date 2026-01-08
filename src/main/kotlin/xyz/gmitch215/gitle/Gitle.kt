@@ -14,7 +14,7 @@ class Gitle : Plugin<Project> {
 
         target.repositories.mavenLocal()
 
-        target.tasks.register<CheckGitleTask>("checkGitle", CheckGitleTask::class.java)
+        target.tasks.register("checkGitle", CheckGitleTask::class.java)
 
         if (target.tasks.any { it.name == "classes" })
             target.tasks.getByName("classes").dependsOn("checkGitle")

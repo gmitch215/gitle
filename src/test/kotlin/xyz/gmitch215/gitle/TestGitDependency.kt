@@ -145,6 +145,14 @@ class TestGitDependency {
     }
 
     @Test
+    fun testBitbucket() {
+        val d1 = bitbucket("gmitch215", "gitle")
+        assertEquals("gmitch215/gitle", d1.slug)
+
+        assertTrue { d1.repositoryURL.endsWith("bitbucket.org/gmitch215/gitle.git") }
+    }
+
+    @Test
     fun testGitFunctions() {
         val d1 = github("CodeMC", "API")
         d1.clone()
