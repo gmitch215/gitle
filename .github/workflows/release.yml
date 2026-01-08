@@ -1,17 +1,20 @@
 name: Release Project
 on:
-  release:
-    types: [published]
-  push:
-    tags:
-      - '*'
   workflow_dispatch:
+    inputs:
+      changelog:
+        type: string
+        description: 'Changelog to replace the auto-generated one'
+      suffix:
+        type: string
+        description: 'Suffix to append to the version'
+        default: ''
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     name: Publish Project
-    timeout-minutes: 60
+    timeout-minutes: 120
 
     steps:
       - uses: actions/checkout@v6
@@ -32,3 +35,38 @@ jobs:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
         run: ./gradlew publish publishPlugins
+
+  release:
+    runs-on: ubuntu-latest
+    name: Release Project
+    timeout-minutes: 30
+    needs: publish
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Change Permissions
+        run: chmod +x ./gradlew
+      - name: Extract Gradle version
+        run: echo "VERSION=$(./gradlew properties | grep '^version:' | awk '{print $2}')" >> $GITHUB_ENV
+      - name: Retrieve Latest Tag
+        id: latest_tag
+        run: echo "LATEST_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+      - name: Generate Changelog
+        if: ${{ github.event.inputs.changelog == '' }}
+        id: changelog
+        uses: mikepenz/release-changelog-builder-action@v6
+        with:
+          configuration: ".github/release.json"
+          mode: "HYBRID"
+          fromTag: "${{ env.LATEST_TAG }}"
+          toTag: "${{ github.ref_name }}"
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION }}${{ github.event.inputs.suffix }}
+          name: gitle v${{ env.VERSION }}${{ github.event.inputs.suffix }}
+          body: ${{ steps.changelog.outputs.changelog || github.event.inputs.changelog }}
+          draft: false
+          prerelease: ${{ github.ref_name != 'master' }}

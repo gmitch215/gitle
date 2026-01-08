@@ -54,6 +54,24 @@ jobs:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
         run: ./gradlew assemble
+      - name: Archive Build Artifacts
+        id: archive
+        uses: actions/upload-artifact@v6
+        with:
+          name: build-artifacts
+          path: |
+            build/classes/
+            build/libs/
+            build/resources/
+            build/pluginDescriptors
+          overwrite: true
+      - name: Attest Build Artifacts
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-name: build-artifacts-${{ github.run_id }}
+          subject-digest: sha256:${{ steps.archive.outputs.artifact-digest }}
+      - name: Stop Gradle
+        run: ./gradlew --stop
 
   test:
     runs-on: ${{ matrix.os }}
