@@ -1,6 +1,6 @@
 # gitle
 
-> 📥 Download Artifacts from any Git Repository
+> 📥 Download Maven & Gradle Artifacts from any Git Repository
 
 Gitle is a gradle plugin that allows you to download artifacts from any git repository. 
 It is useful when you want to download artifacts from a repository that can't be accessed via Maven.
@@ -22,12 +22,13 @@ import xyz.gmitch215.gitle.import
 import xyz.gmitch215.gitle.github
 
 plugins {
-    id("xyz.gmitch215.gitle") version "0.1.0"
+    id("xyz.gmitch215.gitle") version "[VERSION]"
 }
 
 dependencies {
     import("https://github.com/example/repo.git")
     import(github("OtherUser", "OtherRepository"))
+    import(gitlab("Company/PrivateRepo/Project"), token = "super-secret-token")
     
     implementation("com.example:artifact:1.0.0")
 }
