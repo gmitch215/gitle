@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("jvm") version "2.3.10"
-    id("org.jetbrains.dokka") version "2.1.0"
-    id("com.gradle.plugin-publish") version "2.0.0"
-    id("com.vanniktech.maven.publish") version "0.36.0"
+    kotlin("jvm") version "2.4.0"
+    id("org.jetbrains.dokka") version "2.2.0"
+    id("com.gradle.plugin-publish") version "2.1.1"
+    id("com.vanniktech.maven.publish") version "0.37.0"
 
     jacoco
     `maven-publish`
@@ -39,7 +39,7 @@ dependencies {
     implementation(gradleApi())
     implementation(kotlin("stdlib"))
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:6.1.0")
     testImplementation(kotlin("test"))
 }
 
