@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '17.0.20+101'
           cache: 'gradle'
       - name: Change Permissions
         run: chmod +x ./gradlew
@@ -101,7 +101,7 @@ jobs:
       - name: Setup JDK 17
         uses: actions/setup-java@v6
         with:
-          java-version: '17'
+          java-version: '17.0.20+101'
           distribution: 'temurin'
           cache: 'gradle'
       - name: Change Permissions
@@ -117,7 +117,7 @@ jobs:
       - name: Collect JaCoCo Report
         if: ${{ github.event_name != 'pull_request' }}
         id: jacoco_reporter
-        uses: PavanMudigonda/jacoco-reporter@v5.1
+        uses: PavanMudigonda/jacoco-reporter@v5.2
         with:
           coverage_results_path: build/jacoco.xml
           coverage_report_name: Code Coverage (${{ matrix.os }})
@@ -146,7 +146,7 @@ jobs:
 
       - name: Upload Code Coverage Artifacts (Pull Request)
         if: ${{ github.event_name == 'pull_request' }}
-        uses: madrapps/jacoco-report@v1.7.2
+        uses: madrapps/jacoco-report@v1.8.0
         with:
           paths: build/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -175,7 +175,7 @@ jobs:
         uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '17.0.20+101'
           cache: 'gradle'
       - name: Change Permissions
         run: chmod +x ./gradlew
