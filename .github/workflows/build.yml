@@ -117,7 +117,7 @@ jobs:
       - name: Collect JaCoCo Report
         if: ${{ github.event_name != 'pull_request' }}
         id: jacoco_reporter
-        uses: PavanMudigonda/jacoco-reporter@v5.1
+        uses: PavanMudigonda/jacoco-reporter@v5.2
         with:
           coverage_results_path: build/jacoco.xml
           coverage_report_name: Code Coverage (${{ matrix.os }})
@@ -146,7 +146,7 @@ jobs:
 
       - name: Upload Code Coverage Artifacts (Pull Request)
         if: ${{ github.event_name == 'pull_request' }}
-        uses: madrapps/jacoco-report@v1.7.2
+        uses: madrapps/jacoco-report@v1.8.0
         with:
           paths: build/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
